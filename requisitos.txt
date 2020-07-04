@@ -1,2 +1,15 @@
+credenciais
 nsc.rodolfo@gmail.com
 123456
+
+
+Pagina inicial: apenas colocar uma letra melhor para não confundir com a foto de fundo e mudar o print do aplicativo.
+Pagina de cadastro: verificar se o e-mail é válido e se as senhas são iguais. Mudar os textbox para ficarem iguais ao da página de login.
+Pagina de login: verificar se o e-mail é válido
+Página quando logado: mostrar o perfil de um jeito melhor, manter as propriedades como estão porém, se achar um jeito melhor de apresentar o excluir e editar é bem-vindo. Mostrar as informações corretamente. Fazer os relatórios, que são apenas duas listas (que podem ser exportadas como Excel e pdf) e dois gráficos
+
+.
+
+Todos os phps para controle dos dados no BD já estão feitos e serão disponibilizados
+
+Acompanharei o processo para tirar dúvidas e ajudar em qualquer dúvida
