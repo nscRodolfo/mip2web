@@ -1,0 +1,13 @@
+Perfil
+Propriedades
+Funcionários
+Culturas
+Pragas
+Relatórios
+
+
+Informações dropdown
+Culturas
+Pragas
+Inimigos Naturais
+Métodos de controle

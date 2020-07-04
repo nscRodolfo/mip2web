@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>MIP-Cadastro</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="css/cadastro.css" />
+    <!-- Favicons -->
+    <link href="img/Imagem1.png" rel="icon">
+
+    <script src="js/bootstrap.js"></script>
+
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="formulario">
+            <img src="Imagem/Imagem1.png"> </img>
+
+            <form name="formcad" action="cadastroPHP.php" onsubmit="return GEEKFORGEEKS()" method="POST">
+
+                <p>Nome</p>
+                <input type="text" name="nome" placeholder="Nome completo" required> </input>
+                <br>
+                <p>Telefone</p>
+                <input type="tel" name="telefone" placeholder="(DDD)9999-9999" minlength="10" maxlength="11" required > </input>
+                <br>
+                <p>Email</p>
+                <input type="text" name="email" placeholder="Ex: seunome@gmail.com" required> </input>
+                <br>
+                <p>Senha</p>
+                <input type="password" name="senha" placeholder="******" required minlength="6"> </input>
+                <br>
+                <p>Confirmar Senha</p>
+                <input type="password" name="csenha" placeholder="******" required minlength="6"> </input>
+                <br>
+                <input type="submit" value="Cadastrar" class="btn btn-success" id="botao"></input>
+            </form>
+        </div>
+    </div>
+
+</body>
+
+</html>

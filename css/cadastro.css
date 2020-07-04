@@ -1,0 +1,50 @@
+body{
+    /*background-image: url(../Imagem/cultura.jpg);*/
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-color:#71c55d;
+}
+
+form {
+    width: 80%;
+
+}
+.wrapper{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    padding: 20px;
+}
+
+.formulario{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    padding: 40px;
+    background-color: white;
+    border-radius: 25px;
+}
+
+img{
+    width: 40%;
+    height: auto;
+    margin-bottom: 30px;
+}
+
+input{
+    width: 100%;
+    margin-top: 4px;
+    margin-bottom: 10px;
+}
+
+p{
+    margin: 0px;
+}
+
+#botao{
+    margin-top: 10px;
+    width: 100%;
+}
