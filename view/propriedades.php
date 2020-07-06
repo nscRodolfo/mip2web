@@ -32,7 +32,7 @@ $result = mysqli_query($conexao, $sql);
   <meta name="author" content="">
   <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700" rel="stylesheet">
 
-  <link rel="icon" href="imagem/Imagem1.png">
+  <link rel="icon" href="../assets/img/logo-agroecomp.png">
   <title>Monitoramento Inteligente de Pragas</title>
 
   <!-- Bootstrap core CSS -->

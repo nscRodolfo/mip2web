@@ -24,17 +24,21 @@ $result = mysqli_query($conexao,$sql);
     <meta name="author" content="">
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700" rel="stylesheet">
 
-    <link rel="icon" href="imagem/Imagem1.png">
+    <link rel="icon" href="../assets/img/logo-agroecomp.png">
     <title>Monitoramento Inteligente de Pragas</title>
 
+    <script src="https://code.jquery.com/jquery-3.5.1.js"
+        integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <link href="../assets/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <!-- Bootstrap core CSS -->
-    <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../assets/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
 
     <!-- Additional CSS Files -->
-    <link rel="stylesheet" href="assets/css/fontawesome.css">
-    <link rel="stylesheet" href="assets/css/poslogin-style.css">
-    <link rel="stylesheet" href="assets/css/owl.css">
+    <link rel="stylesheet" href="../assets/css/fontawesome.css">
+    <link rel="stylesheet" href="../assets/css/poslogin-style.css">
+    <link rel="stylesheet" href="../assets/css/owl.css">
 
   </head>
 
@@ -125,14 +129,13 @@ $result = mysqli_query($conexao,$sql);
 
   <!-- Scripts -->
   <!-- Bootstrap core JavaScript -->
-  <script src="lib/jquery/jquery.min.js"></script>
-  <script src="lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="../assets/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-    <script src="assets/js/browser.min.js"></script>
-    <script src="assets/js/breakpoints.min.js"></script>
-    <script src="assets/js/transition.js"></script>
-    <script src="assets/js/owl-carousel.js"></script>
-    <script src="assets/js/custom.js"></script>
+    <script src="../assets/js/browser.min.js"></script>
+    <script src="../assets/js/breakpoints.min.js"></script>
+    <script src="../assets/js/transition.js"></script>
+    <script src="../assets/js/owl-carousel.js"></script>
+    <script src="../assets/js/custom.js"></script>
 </body>
 
 
