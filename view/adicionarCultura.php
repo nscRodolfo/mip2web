@@ -180,6 +180,7 @@ $result = mysqli_query($conexao, $sql);
             data: dados,
             success: function(result) {
               swal("Tudo certo", "Cultura inserida com sucesso", "success");
+              window.location = 'culturas.php?idPropriedade=<?php echo $codPropriedade?>';
             },
             error: function() {
               swal("Oops", "Erro ao processar requisição!", "error");

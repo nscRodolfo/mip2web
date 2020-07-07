@@ -8,24 +8,31 @@ if (!isset($_SESSION['logado']) == TRUE) {
   header('location: login.php');
 }
 $sessionID = $_SESSION['id'];
-$codTalhao = $_GET['CodTalhao']; #a praga é no talhão né?
-$codCultura = $_GET['CodCultura']; #a praga é no talhão né?
-$conexao = mysqli_connect('localhost', 'root', '', 'desenvolvimento') or die("Falha na conexão com o banco de dados!");
-$sql = "select *
-    from praga
-    JOIN presencapraga where praga.Cod_Praga = presencapraga.fk_Praga_Cod_Praga
-    and presencapraga.fk_Talhao_Cod_Talhao = $codTalhao;";
+$codCultura = $_GET['idCultura'];
+$codPlanta = $_GET['codPlanta'];
+$codPropriedade = $_GET['codPropriedade'];
+
+//lista os talhoes de certa cultura
+
+$conexao = mysqli_connect('127.0.0.1', 'root', '', 'desenvolvimento') or die("Falha na conexão com o banco de dados!");
+$sql = " select Talhao.Nome as name, Cod_Talhao as cod
+from talhao, planta, propriedade
+JOIN cultura where planta.Cod_Planta = cultura.fk_Planta_Cod_Planta 
+and cultura.Cod_Cultura = $codCultura
+and cultura.fk_Planta_Cod_Planta = $codPlanta
+and cultura.fk_Planta_Cod_Planta = planta.Cod_Planta
+and propriedade.Cod_Propriedade = $codPropriedade
+and cultura.fk_Propriedade_Cod_Propriedade = propriedade.Cod_Propriedade
+and talhao.fk_Cultura_Cod_Cultura = cultura.Cod_Cultura
+and talhao.fk_Planta_Cod_Planta = planta.Cod_Planta";
+
 
 
 $result = mysqli_query($conexao, $sql);
 
-// $result2 = mysqli_query($conexao, "select planta.Nome, planta.NomeCientifico, propriedade.Nome as NomeP from  planta
-// join cultura 
-// join propriedade where cultura.fk_Propriedade_Cod_Propriedade = propriedade.Cod_Propriedade
-// and planta.Cod_Planta = cultura.fk_Planta_Cod_Planta
-// and cultura.Cod_Cultura = $codCultura");
+$result2 = mysqli_query($conexao, " select * from propriedade where propriedade.Cod_Propriedade = $codPropriedade");
 
-// $Cultura = mysqli_fetch_array($result2);
+$Propriedade = mysqli_fetch_array($result2);
 
 ?>
 
@@ -37,17 +44,17 @@ $result = mysqli_query($conexao, $sql);
 <head>
 
   <meta charset="utf-8">
-  <meta name="viewport" content="with=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
-  <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700" rel="stylesheet">
-
-  <link rel="icon" href="../assets/img/logo-agroecomp.png">
-  <title>Monitoramento Inteligente de Pragas</title>
-
   <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
   <link href="../assets/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700" rel="stylesheet">
+
+  <link rel="icon" href="imagem/Imagem1.png">
+  <title>Monitoramento Inteligente de Pragas</title>
+
   <!-- Bootstrap core CSS -->
   <link href="../assets/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
@@ -76,33 +83,32 @@ $result = mysqli_query($conexao, $sql);
         </header>
 
         <div>
-          <!-- <h5>Pragas - <?php echo '' . $Cultura['Nome'] . ' - ' . $Cultura['NomeP'] . '' ?> -->
+          <h5>Talhões - <?php echo $Propriedade['Nome'] ?>
+
           </h5>
           <hr size=7>
         </div>
-
         <section id="dados">
           <div class="row">
             <?php
+
+
             while ($tupla = mysqli_fetch_array($result)) {
               echo '
                 
                <div class="col-md-4">
-               <div class="card">
+                
+               <a href="Pragas.php?CodTalhao=' . $tupla['cod'] . '&CodCultura=' . $codCultura. '" id="card_a"><div class="card">
                   <div class="titulo">
                     <h5>
-                     ' . $tupla['Nome'] . '
+                     ' . $tupla['name'] . '
                     </h5>
                     
                   </div>
                   <div class = "informacoes">
-                  <span style="color: #659251;">
-                  Nome Científico: ' . $tupla['Nome'] . '
-                </span>
                 <br>
-                <a href="excluirPraga.php?idPraga=' . $tupla['Cod_PresencaPraga'] . '&CodTalhao=' . $codTalhao . '&CodCultura=' . $codCultura . '" class="btn btn-secondary bec" >Excluir</a>
                   </div>
-                </div>
+                </div></a>
                </div>
                
                ';
@@ -110,7 +116,7 @@ $result = mysqli_query($conexao, $sql);
             ?>
           </div>
         </section>
-
+<!--                 // <a href="excluirTalhao.php?CodTalhao=' . $tupla['cod'] . '" class="btn btn-secondary bec" >Excluir</a> -->
 
 
 
@@ -149,12 +155,12 @@ $result = mysqli_query($conexao, $sql);
             </li>
           </ul>
         </nav>
-
         <?php
-        echo '<a href="adicionarPragas.php?codTalhao=' . $codTalhao . '&codCultura='.$codCultura.'" class="float">
-<i class="fa fa-plus my-float"></i>
-</a>'
-        ?>
+        // echo '
+        //     <a href="adicionarCultura.php?idPropriedade=' . $codPropriedade . '" class="float">
+        //     <i class="fa fa-plus my-float"></i>
+        //     </a>'
+        // ?>
         <!-- Footer -->
         <footer id="footer">
           <p class="copyright">Copyright &copy; 2019 AgroeComp
@@ -168,7 +174,7 @@ $result = mysqli_query($conexao, $sql);
 
   <!-- Scripts -->
   <!-- Bootstrap core JavaScript -->
-  <script src="../lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="../assets/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
 
   <script src="../assets/js/browser.min.js"></script>
   <script src="../assets/js/breakpoints.min.js"></script>

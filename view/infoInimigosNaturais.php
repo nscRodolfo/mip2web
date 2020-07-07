@@ -64,7 +64,7 @@ $result = mysqli_query($conexao, $sql);
           <?php
           while ($fetch = mysqli_fetch_row($result)) {
             echo "<h5>Nome: " . $fetch[1] .
-              "<br><br>Nome científico: " . $fetch[2] .
+              // "<br><br>Nome científico: " . $fetch[2] .
               "</h5><hr size = 7><br>";
           }
           ?>

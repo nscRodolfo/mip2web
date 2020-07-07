@@ -8,8 +8,8 @@ if (!isset($_SESSION['logado']) == TRUE) {
   header('location: login.php');
 }
 $sessionID = $_SESSION['id'];
-$codCultura = $_GET['idCultura'];
-
+$codTalhao = $_GET['codTalhao'];
+$codCultura = $_GET['codCultura'];
 $conexao = mysqli_connect('127.0.0.1', 'root', '', 'desenvolvimento') or die("Falha na conexão com o banco de dados!");
 $sql = "select Cod_Praga, Nome from praga";
 $result = mysqli_query($conexao, $sql);
@@ -75,7 +75,7 @@ $result = mysqli_query($conexao, $sql);
         <section id="adicionar">
           <!--echo '<form name="adicionarPraga" method="POST" action="adicionarPragasBanco.php?idCultura=' . $codCultura . '">' -->
           <form id="formAdicionarPraga">
-
+            <input type="hidden" name="Cod_Talhao" id="Cod_Talhao" value="<?php echo $codTalhao ?>">
             <label>Selecione uma praga </label>
             <select id="Cod_Praga" name="Cod_Praga" class="form-control">
               <option>Selecione...</option>
@@ -153,6 +153,7 @@ $result = mysqli_query($conexao, $sql);
             data: dados,
             success: function(result) {
               swal("Tudo certo", "Praga adicionada com sucesso", "success");
+              window.location = 'Pragas.php?CodTalhao=<?php echo $codTalhao?>&CodCultura=<?php echo $codCultura?>';
             },
             error: function() {
               swal("Oops", "Erro ao processar requisição!", "error");

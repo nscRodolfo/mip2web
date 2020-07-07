@@ -11,7 +11,7 @@ $sessionID = $_SESSION['id'];
 $codPropriedade = $_GET['idPropriedade'];
 
 $conexao = mysqli_connect('127.0.0.1', 'root', '', 'desenvolvimento') or die("Falha na conexão com o banco de dados!");
-$sql = "select planta.Nome,
+$sql = "select planta.Nome, planta.Cod_Planta,
       (
         select count(*) from talhao
         JOIN cultura where talhao.fk_Cultura_Cod_Cultura = cultura.Cod_Cultura   
@@ -90,7 +90,7 @@ $Propriedade = mysqli_fetch_array($result2);
                 
                <div class="col-md-4">
                 
-               <a href="Pragas.php?idCultura=' . $tupla['Cod_Cultura'] . '" id="card_a"><div class="card">
+               <a href="talhoes.php?idCultura=' . $tupla['Cod_Cultura'] . '&codPropriedade=' .$codPropriedade . '&codPlanta=' .$tupla['Cod_Planta'] . '" id="card_a"><div class="card">
                   <div class="titulo">
                     <h5>
                      ' . $tupla['Nome'] . '

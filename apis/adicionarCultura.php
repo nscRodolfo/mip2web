@@ -24,6 +24,3 @@
         $verifica = array("confirmacao" => true);
 
     echo json_encode($verifica);
-
-
-?>
