@@ -17,8 +17,11 @@ $sql = "select propriedade.Cod_Propriedade, propriedade.Nome, propriedade.Cidade
         and usuario.Cod_Usuario = $sessionID";
 $result = mysqli_query($conexao, $sql);
 
-?>
+$sql = "select Cod_Produtor from produtor where fk_Usuario_Cod_Usuario = '$sessionID'";
+$result = mysqli_query($conexao, $sql);
+$aux = mysqli_fetch_array($result);
 
+?>
 
 
 <!DOCTYPE html>
@@ -73,40 +76,37 @@ $result = mysqli_query($conexao, $sql);
 
 
         <section id="adicionar">
-          <form action="adicionarPBanco.php" method="POST">
+          <form id="formAdicionarPropriedade">
+            <input type="hidden" name="fk_Produtor_Cod_Produtor" value=<?php echo $aux[0]; ?>>
             <table>
               <tr>
                 <td>
                   <h6>Nome da propriedade: </h6>
                 </td>
-                <td> <input type="text" name="nomePropriedade"class="form-control" placeholder="Ex: Fazenda..." required>
+                <td> <input type="text" name="Nome" id="nome-propriedade" class="form-control" placeholder="Ex: Fazenda..." required>
                   </input> </td>
               </tr>
-
               <tr>
                 <td>
                   <h6>Cidade: </h6>
                 </td>
-                <td> <input type="text" name="cidade" class="form-control" placeholder="Ex: Rio Pomba" required>
+                <td> <input type="text" name="Cidade" id="cidade" class="form-control" placeholder="Ex: Rio Pomba" required>
                   </input>
                 </td>
               </tr>
-
               <tr>
                 <td>
                   <h6>Estado: </h6>
                 </td>
-                <td> <input type="text" name="estado" class="form-control" placeholder="Ex: MG, SP, RJ ..." maxlength="2" required>
+                <td> <input type="text" name="Estado" id="estado" class="form-control" placeholder="Ex: MG, SP, RJ ..." maxlength="2" required>
                   </input>
                 </td>
               </tr>
 
             </table>
 
-
-
             <br>
-            <input type="submit" value="Salvar" class="btn btn-success" id="botao">
+            <input type="submit" value="Salvar" class="btn btn-success" id="btnAdicionarPropriedade">
             </input>
           </form>
         </section>
@@ -161,6 +161,32 @@ $result = mysqli_query($conexao, $sql);
 
   </div>
 
+  <script>
+    $(document).ready(function() {
+      $('#btnAdicionarPropriedade').click(function() {
+        setTimeout(() => {
+
+        }, 2000);
+        if ($.trim($('#nome-propriedade').val()) == '' || $.trim($('#cidade').val()) == '' || $.trim($('#estado').val()) == '') {
+          swal("Oops", "Por favor, preencha todos os campos", "warning")
+        } else {
+          var dados = $('#formAdicionarPropriedade').serializeArray();
+          $.ajax({
+            type: "GET",
+            url: "../apis/adicionarPropriedade.php",
+            data: dados,
+            success: function(result) {
+              swal("Tudo certo", "Propriedade inserida com sucesso", "success");
+            },
+            error: function() {
+              swal("Oops", "Erro ao processar requisição!", "error");
+            }
+          });
+        }
+        return false;
+      });
+    });
+  </script>
   <!-- Scripts -->
   <!-- Bootstrap core JavaScript -->
   <script src="../assets/lib/bootstrap/js/bootstrap.bundle.min.js"></script>

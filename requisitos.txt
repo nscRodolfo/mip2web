@@ -14,3 +14,15 @@ Fazer os relatórios, que são apenas duas listas (que podem ser exportadas como
 Todos os phps para controle dos dados no BD já estão feitos e serão disponibilizados
 
 Acompanharei o processo para tirar dúvidas e ajudar em qualquer dúvida
+
+grafico e lista 
+resgataDadosGraficoPlantasPlanos (lista e grafico)
+-planos de amostragem realizados
+
+lista e grafico do aplicacoes realizadas
+resgataDadosGraphAplicacao
+
+
+
+
+

@@ -32,6 +32,9 @@ $result = mysqli_query($conexao, $sql);
   <meta name="author" content="">
   <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700" rel="stylesheet">
 
+  <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
   <link rel="icon" href="../assets/img/logo-agroecomp.png">
   <title>Monitoramento Inteligente de Pragas</title>
 
@@ -156,8 +159,7 @@ $result = mysqli_query($conexao, $sql);
 
   <!-- Scripts -->
   <!-- Bootstrap core JavaScript -->
-  <script src="../lib/jquery/jquery.min.js"></script>
-  <script src="../lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="../assets/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
 
   <script src="../assets/js/browser.min.js"></script>
   <script src="../assets/js/breakpoints.min.js"></script>

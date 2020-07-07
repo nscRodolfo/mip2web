@@ -12,6 +12,7 @@ if ($result != null) {
     if ($result['Senha'] == md5($senha)) {
         $response_array['message'] = "Login efetuado com sucesso";
         $response_array['status'] = 1; 
+        session_start();
         $_SESSION['logado'] =  TRUE;
         $_SESSION['email'] = $email;
         $_SESSION['nome'] = $result['Nome'];

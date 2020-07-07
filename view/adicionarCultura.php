@@ -11,7 +11,7 @@ $sessionID = $_SESSION['id'];
 $codPropriedade = $_GET['idPropriedade'];
 
 $conexao = mysqli_connect('127.0.0.1', 'root', '', 'desenvolvimento') or die("Falha na conexão com o banco de dados!");
-$sql = "select Cod_Planta, Nome from planta";
+$sql = "select Cod_Planta, Nome, TamanhoTalhao from planta";
 $result = mysqli_query($conexao, $sql);
 
 ?>
@@ -73,20 +73,29 @@ $result = mysqli_query($conexao, $sql);
 
 
         <section id="adicionar">
-          <?php
-          echo '<form name="adicionarCultura" method="POST" action="adicionarCBanco.php?idPropriedade=' . $codPropriedade . '">'
-          ?>
-          <label>Selecione uma cultura </label>
-          <select name="Cod_Planta" class="form-control">
-            <option>Selecione...</option>
-            <?php while ($cult = mysqli_fetch_array($result)) { ?>
-              <option value="<?php echo $cult['Cod_Planta'] ?>"><?php echo $cult['Nome'] ?></option>
-            <?php } ?>
-          </select>
-          <br>
-          <br>
-          <input type="submit" value="Adicionar" class="btn btn-success" id="botao">
-          </input>
+          <!-- //          echo '<form name="adicionarCultura" method="POST" action="adicionarCBanco.php?idPropriedade=' . $codPropriedade . '">' -->
+
+          <form id="formAdicionarCultura">
+            <label>Selecione uma cultura </label>
+            <select name="fk_Planta_Cod_Planta" id="planta" class="form-control">
+              <option>Selecione...</option>
+              <?php while ($cult = mysqli_fetch_array($result)) { ?>
+                <option value="<?php echo $cult['Cod_Planta'] ?>" data-foo="<?php echo $cult['TamanhoTalhao'] ?>"><?php echo $cult['Nome']; ?></option>
+              <?php } ?>
+            </select>
+            <br />
+            <label>Tamanho da cultura</label>
+            <input type="number" class="form-control" name="TamanhoDaCultura"  id="TamanhoDaCultura">
+            <!-- pega o tamanho do talhão selecionado pra enviar, e n passa aqui -->
+            <input type="hidden" class="form-control" id="tamanho-talhao">
+            <input type="hidden" id="qtdTalhao" name="qtdTalhao">
+            <input type="hidden" name="fk_Propriedade_Cod_Propriedade" value="<?php echo $codPropriedade ?>" ;>
+            <p id="textTalhoes"></p>
+            <!-- 2.0 hectar, talhao de 0.5 -->
+            <br>
+            <br>
+            <input type="submit" value="Adicionar" class="btn btn-success" id="btnAdicionarCultura">
+            </input>
 
           </form>
         </section>
@@ -141,6 +150,46 @@ $result = mysqli_query($conexao, $sql);
 
   </div>
 
+  <script>
+     
+   
+
+    $(document).ready(function() {
+//       var tamanho_talhao;
+//       $('#planta').change(function() {
+       
+// ;
+//       });
+      //adiciona o tamanho do talhão
+      $("#TamanhoDaCultura, #planta").change(function() {
+        var tamanhoCultura = $('#TamanhoDaCultura').val();
+        var selected = $('#planta').find('option:selected');
+        var tamanho_talhao = selected.data('foo');
+        var qtdTalhoes = tamanhoCultura / tamanho_talhao;
+        $('#textTalhoes').text("Quantidade de talhoes: " + qtdTalhoes);
+        $("#qtdTalhao").val(qtdTalhoes);
+      });
+      $('#btnAdicionarCultura').click(function() {
+        if ($.trim($('#planta').val()) == '' || $.trim($('#TamanhoDaCultura').val()) == '' || $.trim($('#tamanho-talhao').val()) == '') {
+          swal("Oops", "Por favor, preencha todos os campos", "warning")
+        } else {
+          var dados = $('#formAdicionarCultura').serializeArray();
+          $.ajax({
+            type: "GET",
+            url: "../apis/adicionarCultura.php",
+            data: dados,
+            success: function(result) {
+              swal("Tudo certo", "Cultura inserida com sucesso", "success");
+            },
+            error: function() {
+              swal("Oops", "Erro ao processar requisição!", "error");
+            }
+          });
+        }
+        return false;
+      });
+    });
+  </script>
   <!-- Scripts -->
   <!-- Bootstrap core JavaScript -->
   <script src="../assets/lib/bootstrap/js/bootstrap.bundle.min.js"></script>

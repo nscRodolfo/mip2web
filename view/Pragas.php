@@ -86,7 +86,7 @@ $Cultura = mysqli_fetch_array($result2);
             <?php
 
 
-            while ($tupla = mysqli_fetch_array($result)) {
+            while ($tupla = mysqli_fetch_array($result2)) {
               echo '
                 
                <div class="col-md-4">

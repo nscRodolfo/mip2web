@@ -10,7 +10,7 @@ if (!isset($_SESSION['logado']) == TRUE) {
 $nome = $_SESSION['nome'];
 $email = $_SESSION['email'];
 $tel = $_SESSION['tel'];
-
+$id = $_SESSION['id'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -62,13 +62,14 @@ $tel = $_SESSION['tel'];
         </div>
         <br>
         <section id="adicionar">
-          <form action="editarUsu.php" method="POST">
+          <form id="formEditarPerfil">
             <table>
               <tr>
                 <td>
+                <input type="hidden" id="Cod_Usu" name="Cod_Usu" value="<?php echo $id ?>">
                   <h6>Nome do produtor: </h6>
                 </td>
-                <td> <input type="text" name="nome" class="form-control" value="<?php echo $nome ?>" required>
+                <td> <input type="text" name="Nome" id="nome" class="form-control" value="<?php echo $nome ?>" required>
                   </input> </td>
               </tr>
 
@@ -76,7 +77,15 @@ $tel = $_SESSION['tel'];
                 <td>
                   <h6>Telefone: </h6>
                 </td>
-                <td> <input type="text" name="telefone" class="form-control" value="<?php echo $tel ?>" minlength="10" maxlength="11" required>
+                <td> <input type="text" name="Telefone" id="telefone" class="form-control" value="<?php echo $tel ?>" minlength="10" maxlength="11" required>
+                  </input>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <h6>Email: </h6>
+                </td>
+                <td> <input type="text" name="Email" class="form-control" id="email" value="<?php echo $email ?>" minlength="10" maxlength="11" required>
                   </input>
                 </td>
               </tr>
@@ -86,7 +95,7 @@ $tel = $_SESSION['tel'];
 
 
             <br>
-            <input type="submit" value="Salvar" class="btn btn-success" id="botao">
+            <input type="submit" value="Salvar" class="btn btn-success" id="btnEditarPerfil">
             </input>
           </form>
         </section>
@@ -139,7 +148,45 @@ $tel = $_SESSION['tel'];
 
 
 
+  <script>
+        //cadastro e edição de casos
 
+
+        $(document).ready(function() {
+
+            function IsEmail(email) {
+                var regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+                if (!regex.test(email)) {
+                    return false;
+                } else {
+                    return true;
+                }
+            }
+
+            $('#btnEditarPerfil').click(function() {
+                var email = $('#email').val();
+                if ($.trim($('#nome').val()) == '' || $.trim($('#telefone').val()) == '' || $.trim($('#email').val()) == '') {
+                    swal("Oops", "Por favor, preencha todos os campos", "warning")
+                } else if (!(IsEmail(email))) {
+                    swal("Oops", "Digite um email válido", "warning")
+                } else {
+                    var dados = $('#formEditarPerfil').serializeArray();
+                    $.ajax({
+                        type: "GET",
+                        url: "../apis/attInfoPerfil.php",
+                        data: dados,
+                        success: function(result) {
+                          swal("Tudo certo", "Perfil alterado com sucesso!", "success");
+                        },
+                        error: function() {
+                            swal("Oops", "Erro ao processar requisição!", "error");
+                        }
+                    });
+                }
+                return false;
+            });
+        });
+    </script>
 
   <!-- Scripts -->
   <!-- Bootstrap core JavaScript -->

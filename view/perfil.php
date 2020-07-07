@@ -28,10 +28,9 @@ $tel = $_SESSION['tel'];
 
   <!-- Bootstrap core CSS -->
   <link href="../assets/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  
-  <script src="https://code.jquery.com/jquery-3.5.1.js"
-        integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
   <link href="../assets/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <!-- Additional CSS Files -->
   <link rel="stylesheet" href="../assets/css/fontawesome.css">
@@ -81,7 +80,7 @@ $tel = $_SESSION['tel'];
           </h5>
           <br>
           <a href="editarPerfil.php" class="btn btn-success" id="botao">Editar</a>
-          <a href="sair.php" class="btn btn-secondary" id="botaoSair">Sair</a>
+          <a href="../sair.php" class="btn btn-secondary" id="botaoSair">Sair</a>
         </section>
       </div>
     </div>
