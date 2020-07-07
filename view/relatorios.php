@@ -33,7 +33,7 @@ $tel = $_SESSION['tel'];
   <link href="../assets/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
 
-  
+
   <!-- Additional CSS Files -->
   <link rel="stylesheet" href="../assets/css/fontawesome.css">
   <link rel="stylesheet" href="../assets/css/poslogin-style.css">
@@ -116,14 +116,13 @@ $tel = $_SESSION['tel'];
 
   <!-- Scripts -->
   <!-- Bootstrap core JavaScript -->
-  <script src="lib/jquery/jquery.min.js"></script>
-  <script src="lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="../assets/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-  <script src="assets/js/browser.min.js"></script>
-  <script src="assets/js/breakpoints.min.js"></script>
-  <script src="assets/js/transition.js"></script>
-  <script src="assets/js/owl-carousel.js"></script>
-  <script src="assets/js/custom.js"></script>
+  <script src="../assets/js/browser.min.js"></script>
+  <script src="../assets/js/breakpoints.min.js"></script>
+  <script src="../assets/js/transition.js"></script>
+  <script src="../assets/js/owl-carousel.js"></script>
+  <script src="../assets/js/custom.js"></script>
 </body>
 
 

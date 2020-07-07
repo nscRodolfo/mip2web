@@ -9,17 +9,17 @@ if (!isset($_SESSION['logado']) == TRUE) {
 }
 $sessionID = $_SESSION['id'];
 $codCultura = $_GET['idCultura'];
-
-$conexao = mysqli_connect('127.0.0.1', 'root', '', 'desenvolvimento') or die("Falha na conexão com o banco de dados!");
+$codTalhao = 17; #a praga é no talhão né?
+$conexao = mysqli_connect('localhost', 'root', '', 'desenvolvimento') or die("Falha na conexão com o banco de dados!");
 $sql = "select *
     from praga
     JOIN presencapraga where praga.Cod_Praga = presencapraga.fk_Praga_Cod_Praga
-    and presencapraga.fk_Cultura_Cod_Cultura = $codCultura;";
+    and presencapraga.fk_Talhao_Cod_Talhao = $codTalhao;";
 
 
 $result = mysqli_query($conexao, $sql);
 
-$result2 = mysqli_query($conexao, " select planta.Nome, planta.NomeCientifico, propriedade.Nome as NomeP from  planta
+$result2 = mysqli_query($conexao, "select planta.Nome, planta.NomeCientifico, propriedade.Nome as NomeP from  planta
 join cultura 
 join propriedade where cultura.fk_Propriedade_Cod_Propriedade = propriedade.Cod_Propriedade
 and planta.Cod_Planta = cultura.fk_Planta_Cod_Planta
@@ -84,9 +84,7 @@ $Cultura = mysqli_fetch_array($result2);
         <section id="dados">
           <div class="row">
             <?php
-
-
-            while ($tupla = mysqli_fetch_array($result2)) {
+            while ($tupla = mysqli_fetch_array($result)) {
               echo '
                 
                <div class="col-md-4">

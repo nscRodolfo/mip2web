@@ -77,7 +77,7 @@ $result = mysqli_query($conexao, $sql);
           <form id="formAdicionarPraga">
 
             <label>Selecione uma praga </label>
-            <select name="Cod_Praga" class="form-control">
+            <select id="Cod_Praga" name="Cod_Praga" class="form-control">
               <option>Selecione...</option>
               <?php while ($prag = mysqli_fetch_array($result)) { ?>
                 <option value="<?php echo $prag['Cod_Praga'] ?>"><?php echo $prag['Nome'] ?></option>
@@ -143,29 +143,16 @@ $result = mysqli_query($conexao, $sql);
   <script>
     $(document).ready(function() {
       $('#btnAdicionarPraga').click(function() {
-        if ($.trim($('#senha').val()) == '') {
+        if ($.trim($('#Cod_Praga').val()) == '') {
           swal("Oops", "Por favor, preencha todos os campos", "warning")
-        } else if (!(IsEmail(email))) {
-          swal("Oops", "Digite um email válido", "warning")
         } else {
           var dados = $('#formAdicionarPraga').serializeArray();
           $.ajax({
-            type: "POST",
-            url: "../apis/EntrarSite.php",
+            type: "GET",
+            url: "../apis/adicionarPraga.php",
             data: dados,
             success: function(result) {
-              alert(result);
-              var resultado = JSON.parse(result);
-              var status = resultado['status'];
-              var message = resultado['message'];
-              if (status == 1) {
-                swal("Tudo certo", message, "success");
-                window.location.href = "../view/propriedades.php";
-              } else if (status == 2) {
-                swal("Oops", message, "error");
-              } else if (status == 3) {
-                swal("Oops", message, "error");
-              }
+              swal("Tudo certo", "Praga adicionada com sucesso", "success");
             },
             error: function() {
               swal("Oops", "Erro ao processar requisição!", "error");

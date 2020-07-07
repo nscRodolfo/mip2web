@@ -170,7 +170,7 @@ $result = mysqli_query($conexao, $sql);
         $("#qtdTalhao").val(qtdTalhoes);
       });
       $('#btnAdicionarCultura').click(function() {
-        if ($.trim($('#planta').val()) == '' || $.trim($('#TamanhoDaCultura').val()) == '' || $.trim($('#tamanho-talhao').val()) == '') {
+        if ($.trim($('#planta').val()) == '' || $.trim($('#TamanhoDaCultura').val()) == '') {
           swal("Oops", "Por favor, preencha todos os campos", "warning")
         } else {
           var dados = $('#formAdicionarCultura').serializeArray();

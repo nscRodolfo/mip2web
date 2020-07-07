@@ -76,12 +76,13 @@ $id = $_GET['idPropriedade'];
         <section id="editar">
           <!-- editarPBanco.php?idPropriedade= -->
           <form id="formEditarPropriedade">
+            <input type="hidden" name="Cod_Propriedade" value="<?php echo $_GET['idPropriedade']; ?>">
             <table>
               <tr>
                 <td>
                   <h6>Nome da propriedade: </h6>
                 </td>
-                <td> <input type="text" class="form-control" name="nomePropriedade" id="nome-propriedade" value="<?php echo $nome ?>">
+                <td> <input type="text" class="form-control" name="Nome" id="nome-propriedade" value="<?php echo $nome ?>">
                   </input> </td>
               </tr>
 
@@ -89,7 +90,7 @@ $id = $_GET['idPropriedade'];
                 <td>
                   <h6>Cidade: </h6>
                 </td>
-                <td> <input type="text" name="cidade" class="form-control" id="cidade" value="<?php echo $cidade ?>">
+                <td> <input type="text" name="Cidade" class="form-control" id="cidade" value="<?php echo $cidade ?>">
                   </input>
                 </td>
               </tr>
@@ -98,7 +99,7 @@ $id = $_GET['idPropriedade'];
                 <td>
                   <h6>Estado: </h6>
                 </td>
-                <td> <input type="text" name="estado" class="form-control" id="estado" maxlength="2" value="<?php echo $estado ?>">
+                <td> <input type="text" name="Estado" class="form-control" id="estado" maxlength="2" value="<?php echo $estado ?>">
                   </input>
                 </td>
               </tr>
@@ -168,22 +169,12 @@ $id = $_GET['idPropriedade'];
         } else {
           var dados = $('#formEditarPropriedade').serializeArray();
           $.ajax({
-            type: "POST",
-            url: "#",
+            type: "GET",
+            url: "../apis/editarPropriedade.php",
             data: dados,
             success: function(result) {
-              alert(result);
-              var resultado = JSON.parse(result);
-              var status = resultado['status'];
-              var message = resultado['message'];
-              if (status == 1) {
-                swal("Tudo certo", message, "success");
-                window.location.href = "../view/propriedades.php";
-              } else if (status == 2) {
-                swal("Oops", message, "error");
-              } else if (status == 3) {
-                swal("Oops", message, "error");
-              }
+              swal("Tudo certo", "Propriedade editada com sucesso", "success");
+
             },
             error: function() {
               swal("Oops", "Erro ao processar requisição!", "error");
