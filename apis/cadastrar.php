@@ -27,7 +27,7 @@
         $stmt->bindParam(':NOME',$nome);
         $stmt->bindParam(':TELEFONE',$telefone);
         $stmt->bindParam(':EMAIL',$email);
-        $stmt->bindParam(':SENHA',$senha);
+        $stmt->bindParam(':SENHA',md5($senha));
 
         // só executa a query depois de receber os valores
         $stmt->execute();
