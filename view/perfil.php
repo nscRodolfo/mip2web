@@ -80,7 +80,7 @@ $tel = $_SESSION['tel'];
           </h5>
           <br>
           <a href="editarPerfil.php" class="btn btn-success" id="botao">Editar</a>
-          <a href="../sair.php" class="btn btn-secondary" id="botaoSair">Sair</a>
+          <a href="../apis/sair.php" class="btn btn-secondary" id="botaoSair">Sair</a>
         </section>
       </div>
     </div>

@@ -4,5 +4,5 @@
       unset($_SESSION['email']);
       unset($_SESSION['nome']);
       unset($_SESSION['id']);
-      header('location: index.html');
+      header('location: ../index.html');
 ?>

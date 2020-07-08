@@ -10,6 +10,8 @@ if (!isset($_SESSION['logado']) == TRUE) {
 $sessionID = $_SESSION['id'];
 $codTalhao = $_GET['codTalhao'];
 $codCultura = $_GET['codCultura'];
+$codPropriedade = $_GET['codPropriedade'];
+$codPlanta = $_GET['codPlanta'];
 $conexao = mysqli_connect('127.0.0.1', 'root', '', 'desenvolvimento') or die("Falha na conexão com o banco de dados!");
 $sql = "select Cod_Praga, Nome from praga";
 $result = mysqli_query($conexao, $sql);
@@ -153,7 +155,7 @@ $result = mysqli_query($conexao, $sql);
             data: dados,
             success: function(result) {
               swal("Tudo certo", "Praga adicionada com sucesso", "success");
-              window.location = 'Pragas.php?CodTalhao=<?php echo $codTalhao?>&CodCultura=<?php echo $codCultura?>';
+              window.location = 'Pragas.php?CodTalhao=<?php echo $codTalhao?>&CodPlanta=<?php echo $codPlanta?>&CodPropriedade=<?php echo $codPropriedade?>&CodCultura=<?php echo $codCultura?>CodTalhao=<?php echo $codTalhao?>&CodCultura=<?php echo $codCultura?>';
             },
             error: function() {
               swal("Oops", "Erro ao processar requisição!", "error");

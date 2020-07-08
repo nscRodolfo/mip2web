@@ -32,7 +32,10 @@ $result = mysqli_query($conexao, $sql);
 
 $result2 = mysqli_query($conexao, " select * from propriedade where propriedade.Cod_Propriedade = $codPropriedade");
 
+$result3 = mysqli_query($conexao, " select * from planta where planta.Cod_Planta = $codPlanta");
+
 $Propriedade = mysqli_fetch_array($result2);
+$Planta = mysqli_fetch_array($result3);
 
 ?>
 
@@ -83,7 +86,7 @@ $Propriedade = mysqli_fetch_array($result2);
         </header>
 
         <div>
-          <h5>Talhões - <?php echo $Propriedade['Nome'] ?>
+          <h5>Talhões - <?php echo $Planta['Nome'];?> / <?php echo $Propriedade['Nome']; ?>
 
           </h5>
           <hr size=7>
@@ -98,7 +101,7 @@ $Propriedade = mysqli_fetch_array($result2);
                 
                <div class="col-md-4">
                 
-               <a href="Pragas.php?CodTalhao=' . $tupla['cod'] . '&CodCultura=' . $codCultura. '" id="card_a"><div class="card">
+               <a href="Pragas.php?CodPropriedade='.$codPropriedade.'&CodPlanta='. $codPlanta .'&CodTalhao=' . $tupla['cod'] . '&CodCultura=' . $codCultura. '" id="card_a"><div class="card">
                   <div class="titulo">
                     <h5>
                      ' . $tupla['name'] . '

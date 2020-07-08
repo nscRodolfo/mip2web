@@ -10,6 +10,9 @@ if (!isset($_SESSION['logado']) == TRUE) {
 $sessionID = $_SESSION['id'];
 $codTalhao = $_GET['CodTalhao']; #a praga é no talhão né?
 $codCultura = $_GET['CodCultura']; #a praga é no talhão né?
+$codPlanta = $_GET['CodPlanta'];
+$codPropriedade = $_GET['CodPropriedade'];
+
 $conexao = mysqli_connect('localhost', 'root', '', 'desenvolvimento') or die("Falha na conexão com o banco de dados!");
 $sql = "select *
     from praga
@@ -25,7 +28,15 @@ $result = mysqli_query($conexao, $sql);
 // and planta.Cod_Planta = cultura.fk_Planta_Cod_Planta
 // and cultura.Cod_Cultura = $codCultura");
 
-// $Cultura = mysqli_fetch_array($result2);
+
+$result2 = mysqli_query($conexao, " select * from talhao where talhao.Cod_Talhao = $codTalhao");
+$Talhao = mysqli_fetch_array($result2);
+
+$result3 = mysqli_query($conexao, " select * from planta where planta.Cod_Planta = $codPlanta");
+$Planta = mysqli_fetch_array($result3);
+
+$result4 = mysqli_query($conexao, " select * from propriedade where propriedade.Cod_Propriedade = $codPropriedade");
+$Propriedade = mysqli_fetch_array($result4);
 
 ?>
 
@@ -76,7 +87,8 @@ $result = mysqli_query($conexao, $sql);
         </header>
 
         <div>
-          <!-- <h5>Pragas - <?php echo '' . $Cultura['Nome'] . ' - ' . $Cultura['NomeP'] . '' ?> -->
+        <!-- pragas talhao x / Berinjela / fazenda gado novo -->
+          <h5>Pragas - <?php echo $Talhao['Nome']; ?> de <?php echo $Planta['Nome'] ?> / <?php echo $Propriedade['Nome']; ?>
           </h5>
           <hr size=7>
         </div>
@@ -151,7 +163,7 @@ $result = mysqli_query($conexao, $sql);
         </nav>
 
         <?php
-        echo '<a href="adicionarPragas.php?codTalhao=' . $codTalhao . '&codCultura='.$codCultura.'" class="float">
+        echo '<a href="adicionarPragas.php?codPropriedade='.$codPropriedade.'&codPlanta='.$codPlanta.'&codTalhao=' . $codTalhao . '&codCultura=' . $codCultura . '" class="float">
 <i class="fa fa-plus my-float"></i>
 </a>'
         ?>
