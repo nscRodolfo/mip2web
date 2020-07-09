@@ -87,7 +87,7 @@ $Propriedade = mysqli_fetch_array($result4);
         </header>
 
         <div>
-        <!-- pragas talhao x / Berinjela / fazenda gado novo -->
+          <!-- pragas talhao x / Berinjela / fazenda gado novo -->
           <h5>Pragas - <?php echo $Talhao['Nome']; ?> de <?php echo $Planta['Nome'] ?> / <?php echo $Propriedade['Nome']; ?>
           </h5>
           <hr size=7>
@@ -112,6 +112,9 @@ $Propriedade = mysqli_fetch_array($result4);
                   Nome Científico: ' . $tupla['Nome'] . '
                 </span>
                 <br>
+                <a href="#" onClick="showDiv();">
+                Gerar relatórios
+                </a>
                 <a href="excluirPraga.php?idPraga=' . $tupla['Cod_PresencaPraga'] . '&CodTalhao=' . $codTalhao . '&CodCultura=' . $codCultura . '" class="btn btn-secondary bec" >Excluir</a>
                   </div>
                 </div>
@@ -163,7 +166,7 @@ $Propriedade = mysqli_fetch_array($result4);
         </nav>
 
         <?php
-        echo '<a href="adicionarPragas.php?codPropriedade='.$codPropriedade.'&codPlanta='.$codPlanta.'&codTalhao=' . $codTalhao . '&codCultura=' . $codCultura . '" class="float">
+        echo '<a href="adicionarPragas.php?codPropriedade=' . $codPropriedade . '&codPlanta=' . $codPlanta . '&codTalhao=' . $codTalhao . '&codCultura=' . $codCultura . '" class="float">
 <i class="fa fa-plus my-float"></i>
 </a>'
         ?>
@@ -177,19 +180,108 @@ $Propriedade = mysqli_fetch_array($result4);
     </div>
 
   </div>
+  <!-- modal relatorios -->
+  <div class="modal fade" id="modalRelatorios" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="vertical-align: center" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <ul class="list-group">
+            <a href="#" class="list-group-item list-group-item-action" id="graficoPragaContagem">População de pragas por contagem</a> <!-- resgataDadosGraphPlantasPlanos.php -->
+            <a href="#" class="list-group-item list-group-item-action" id="graficoPragaAplicacao">População de pragas por aplicação</a> <!-- resgataDadosGraphAplicacao.php -->
+            <a href="#" class="list-group-item list-group-item-action" id="listaPdfExcelPlanos">Planos de amostragem realizadas</a> <!-- resgataDadosGraphPlantasPlanos.php -->
+            <a href="#" class="list-group-item list-group-item-action" id="listaPdfExcelAplicacoes">Aplicações realizadas</a> <!-- resgataDadosGraphAplicacao.php -->
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- Scripts -->
   <!-- Bootstrap core JavaScript -->
-  <script src="../lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="../assets/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
 
   <script src="../assets/js/browser.min.js"></script>
   <script src="../assets/js/breakpoints.min.js"></script>
   <script src="../assets/js/transition.js"></script>
   <script src="../assets/js/owl-carousel.js"></script>
   <script src="../assets/js/custom.js"></script>
-</body>
+  <script>
+// $Cod_Talhao = $_GET['Cod_Talhao'];
+// $Cod_Praga = $_GET['Cod_Praga'];
+    var codTalhao = <?php echo $codTalhao ?>
+    var codPraga = 0;//vai vir na hora que chama a função
+    $('#graficoPragaContagem').click(function() {
+      $.ajax({
+        type: "GET",
+        url: "../apis/resgataDadosGraphPlantasPlanos.php",
+        data: {"Cod_Talhao" = , "Cod_Praga" = };
+        success: function(result) {
+          //gera o gráfico
+        },
+        error: function() {
+          //
+        }
+      });
+      return false;
+    });
 
 
-</body>
+    $('#graficoPragaAplicacao').click(function() {
+      $.ajax({
+        type: "GET",
+        url: "../apis/resgataDadosGraphAplicacao.php",
+        success: function(result) {
+          //gera o gráfico
+        },
+        error: function() {
+          //
+        }
+      });
+      return false;
+    });
+
+   
+    $('#listaPdfExcelPlanos').click(function() {
+      $.ajax({
+        type: "GET",
+        url: "../apis/resgataDadosGraphPlantasPlanos.php",
+        success: function(result) {
+          //gera abre datatable com os dados 
+        },
+        error: function() {
+          //
+        }
+      });
+      return false;
+    });
+
+    $('#listaPdfExcelAplicacoes').click(function() {
+      $.ajax({
+        type: "GET",
+        url: "../apis/resgataDadosGraphAplicacao.php",
+        success: function(result) {
+          //abre datatable com os dados
+        },
+        error: function() {
+          //
+        }
+      });
+      return false;
+    });
+
+ 
+
+
+    function showDiv(nomePraga) {
+      $('#modalRelatorios').modal('show');
+      $('#exampleModalLabel').text('MIP² | Relatório <?php echo $Planta['Nome']; ?> ' + nomePraga);
+    }
+  </script>
 
 </html>

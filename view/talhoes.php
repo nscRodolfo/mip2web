@@ -55,7 +55,7 @@ $Planta = mysqli_fetch_array($result3);
   <link href="../assets/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700" rel="stylesheet">
 
-  <link rel="icon" href="imagem/Imagem1.png">
+  <link rel="icon" href="../assets/img/logo-agroecomp.png">
   <title>Monitoramento Inteligente de Pragas</title>
 
   <!-- Bootstrap core CSS -->
@@ -86,7 +86,7 @@ $Planta = mysqli_fetch_array($result3);
         </header>
 
         <div>
-          <h5>Talhões - <?php echo $Planta['Nome'];?> / <?php echo $Propriedade['Nome']; ?>
+          <h5>Talhões - <?php echo $Planta['Nome']; ?> / <?php echo $Propriedade['Nome']; ?>
 
           </h5>
           <hr size=7>
@@ -101,7 +101,7 @@ $Planta = mysqli_fetch_array($result3);
                 
                <div class="col-md-4">
                 
-               <a href="Pragas.php?CodPropriedade='.$codPropriedade.'&CodPlanta='. $codPlanta .'&CodTalhao=' . $tupla['cod'] . '&CodCultura=' . $codCultura. '" id="card_a"><div class="card">
+               <a href="Pragas.php?CodPropriedade=' . $codPropriedade . '&CodPlanta=' . $codPlanta . '&CodTalhao=' . $tupla['cod'] . '&CodCultura=' . $codCultura . '" id="card_a"><div class="card">
                   <div class="titulo">
                     <h5>
                      ' . $tupla['name'] . '
@@ -119,7 +119,7 @@ $Planta = mysqli_fetch_array($result3);
             ?>
           </div>
         </section>
-<!--                 // <a href="excluirTalhao.php?CodTalhao=' . $tupla['cod'] . '" class="btn btn-secondary bec" >Excluir</a> -->
+        <!--                 // <a href="excluirTalhao.php?CodTalhao=' . $tupla['cod'] . '" class="btn btn-secondary bec" >Excluir</a> -->
 
 
 
@@ -158,12 +158,8 @@ $Planta = mysqli_fetch_array($result3);
             </li>
           </ul>
         </nav>
-        <?php
-        // echo '
-        //     <a href="adicionarCultura.php?idPropriedade=' . $codPropriedade . '" class="float">
-        //     <i class="fa fa-plus my-float"></i>
-        //     </a>'
-        // ?>
+      
+
         <!-- Footer -->
         <footer id="footer">
           <p class="copyright">Copyright &copy; 2019 AgroeComp
@@ -175,7 +171,10 @@ $Planta = mysqli_fetch_array($result3);
 
   </div>
 
+
   <!-- Scripts -->
+
+
   <!-- Bootstrap core JavaScript -->
   <script src="../assets/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
 
@@ -184,9 +183,6 @@ $Planta = mysqli_fetch_array($result3);
   <script src="../assets/js/transition.js"></script>
   <script src="../assets/js/owl-carousel.js"></script>
   <script src="../assets/js/custom.js"></script>
-</body>
-
-
-</body>
+ 
 
 </html>
