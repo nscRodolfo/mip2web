@@ -104,13 +104,11 @@ $tel = $_SESSION['tel'];
           <ul>
             <li><a href="perfil.php" class="ativo">Perfil</a></li>
             <li><a href="propriedades.php">Propriedades</a></li>
-            <li><a href="relatorios.php">Relatórios</a></li>
             <li>
               <span class="opener">Informações</span>
               <ul>
                 <li><a href="infoCulturas.php">Culturas</a></li>
                 <li><a href="infoPragas.php">Pragas</a></li>
-                <li><a href="infoInimigosNaturais.php">Inimigos Naturais</a></li>
                 <li><a href="infoMeControle.php">Métodos de Controle</a></li>
               </ul>
             </li>

@@ -137,7 +137,6 @@ $aux = mysqli_fetch_array($result);
           <ul>
             <li><a href="perfil.php">Perfil</a></li>
             <li><a href="propriedades.php" class="ativo">Propriedades</a></li>
-            <li><a href="relatorios.php">Relatórios</a></li>
             <li>
               <span class="opener">Informações</span>
               <ul>

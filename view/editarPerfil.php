@@ -121,7 +121,6 @@ $id = $_SESSION['id'];
           <ul>
             <li><a href="perfil.php" class="ativo">Perfil</a></li>
             <li><a href="propriedades.php">Propriedades</a></li>
-            <li><a href="relatorios.php">Relatórios</a></li>
             <li>
               <span class="opener">Informações</span>
               <ul>

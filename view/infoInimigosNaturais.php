@@ -7,9 +7,12 @@ if (!isset($_SESSION['logado']) == TRUE) {
   unset($_SESSION['id']);
   header('location: login.php');
 }
+$codPraga = $_GET['Cod_Praga'];
 $conexao = mysqli_connect('127.0.0.1', 'root', '', 'desenvolvimento') or die("Falha na conexão com o banco de dados!");
-$sql = "select * from inimigonatural";
+$sql = "select i.Nome from combate c,inimigonatural i WHERE c.fk_Praga_Cod_Praga = $codPraga AND c.fk_InimigoNatural_Cod_Inimigo = i.Cod_Inimigo";
 $result = mysqli_query($conexao, $sql);
+
+
 //$aux = mysqli_fetch_array($result); 
 ?>
 <!DOCTYPE html>
@@ -63,9 +66,10 @@ $result = mysqli_query($conexao, $sql);
 
           <?php
           while ($fetch = mysqli_fetch_row($result)) {
-            echo "<h5>Nome: " . $fetch[1] .
+            $pieces = explode("(", $fetch[0]);
+            echo "<h5>Nome: " . $pieces[0] .
               // "<br><br>Nome científico: " . $fetch[2] .
-              "</h5><hr size = 7><br>";
+              "<i>($pieces[1]</i></h5><hr size = 7><br>";
           }
           ?>
         </section>
@@ -91,13 +95,11 @@ $result = mysqli_query($conexao, $sql);
           <ul>
             <li><a href="perfil.php">Perfil</a></li>
             <li><a href="propriedades.php">Propriedades</a></li>
-            <li><a href="relatorios.php">Relatórios</a></li>
             <li>
               <span class="opener">Informações</span>
               <ul>
                 <li><a href="infoCulturas.php">Culturas</a></li>
                 <li><a href="infoPragas.php">Pragas</a></li>
-                <li><a href="infoInimigosNaturais.php" class="ativo">Inimigos Naturais</a></li>
                 <li><a href="infoMeControle.php">Métodos de Controle</a></li>
               </ul>
             </li>

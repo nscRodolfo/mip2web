@@ -154,13 +154,11 @@ $Propriedade = mysqli_fetch_array($result4);
           <ul>
             <li><a href="perfil.php">Perfil</a></li>
             <li><a href="propriedades.php" class="ativo">Propriedades</a></li>
-            <li><a href="relatorios.php">Relatórios</a></li>
             <li>
               <span class="opener">Informações</span>
               <ul>
                 <li><a href="infoCulturas.php">Culturas</a></li>
                 <li><a href="infoPragas.php">Pragas</a></li>
-                <li><a href="infoInimigosNaturais.php">Inimigos Naturais</a></li>
                 <li><a href="infoMeControle.php">Métodos de Controle</a></li>
               </ul>
             </li>
@@ -315,7 +313,7 @@ $Propriedade = mysqli_fetch_array($result4);
         },
         success: function(result) {
           dados = JSON.parse(result);
-
+          console.log(dados);
           //verificar se -> existe dados[0]['Data'])
           $('#modalRelatorios').modal('hide');
           $('#modalGraficoPragaContagem').modal('show');
@@ -377,7 +375,7 @@ $Propriedade = mysqli_fetch_array($result4);
           let pop_pragas = [];
           //prepara os dados de entrada do gráfico
           for (var key in dados) {
-            dataE = (dados[key].Data).split("-")
+            dataE = (dados[key].DataAplicacao).split("-")
             datex = dataE[2] + "/" + dataE[1] + "/" + dataE[0];
             datas.push(datex);
             pop_pragas.push(dados[key].popPragas);
@@ -425,6 +423,7 @@ $Propriedade = mysqli_fetch_array($result4);
             var dadosLocal = [];
             var dadosGeral = [];
             for (var key in dados) {
+              var dadosLocal = [];
               var dataE = (dados[key].Data).split("-")
               var datex = dataE[2] + "/" + dataE[1] + "/" + dataE[0];
               dadosLocal.push(datex);
@@ -449,6 +448,7 @@ $Propriedade = mysqli_fetch_array($result4);
             $('#modalPdfExcelPlanos').modal('show');
 
             $('#tabelaPlanos').DataTable({
+              destroy: true,
               dom: 'Bfrtip',
               buttons: [
                 'copy', 'csv', 'excel', 'pdf', 'print'
@@ -468,10 +468,12 @@ $Propriedade = mysqli_fetch_array($result4);
                   title: "Num. plantas"
                 },
                 {
-                  title: "Cultura"
+                  title: "Cultura",
+                  visible: false
                 },
                 {
-                  title: "Talhão"
+                  title: "Talhão",
+                  visible:false
                 }
               ]
             });
@@ -503,19 +505,30 @@ $Propriedade = mysqli_fetch_array($result4);
             var dadosLocal = [];
             var dadosGeral = [];
             for (var key in dados) {
-              var dataE = (dados[key].Data).split("-")
-              var datex = dataE[2] + "/" + dataE[1] + "/" + dataE[0];
-              dadosLocal.push(datex);
+              var dadosLocal = [];
+              var dataE = (dados[key].DataAplicacao).split("-")
+              var dataAplicacao = dataE[2] + "/" + dataE[1] + "/" + dataE[0];
+              dadosLocal.push(dataAplicacao);
+
               var autor = dados[key].Autor;
               dadosLocal.push(autor);
-              var numAmostras = dados[key].popPragas;
-              dadosLocal.push(numAmostras);
-              var numPlantas = dados[key].numPlantas;
-              dadosLocal.push(numPlantas);
+
               var cultura = "<?php echo $Planta['Nome'] ?>";
               dadosLocal.push(cultura);
+
               var talhao = "<?php echo $Talhao['Nome'] ?>";
               dadosLocal.push(talhao);
+
+              var metodo = dados[key].Metodo;
+              dadosLocal.push(metodo);
+
+
+              var numAmostras = dados[key].popPragas;
+              dadosLocal.push(numAmostras);
+
+              var numPlantas = dados[key].numPlantas;
+              dadosLocal.push(numPlantas);
+            
               dadosGeral.push(dadosLocal);
             }
             // alert(dadosGeral);
@@ -527,6 +540,7 @@ $Propriedade = mysqli_fetch_array($result4);
             $('#modalPdfExcelAplicacoes').modal('show');
 
             $('#tabelaAplicacoes').DataTable({
+              destroy: true,
               dom: 'Bfrtip',
               buttons: [
                 'copy', 'csv', 'excel', 'pdf', 'print'
@@ -540,10 +554,12 @@ $Propriedade = mysqli_fetch_array($result4);
                   title: "Autor"
                 },
                 {
-                  title: "Cultura"
+                  title: "Cultura",
+                  visible: false
                 },
                 {
-                  title: "Talhão"
+                  title: "Talhão",
+                  visible: false
                 },
                 {
                   title: "Método"

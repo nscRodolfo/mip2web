@@ -1104,7 +1104,7 @@ section.buttons .container-fluid {
     	background-color: transparent;
     }
     #sidebar .toggle:after {
-        background: rgba(83, 91, 160, 0.90);
+        /* background: rgba(83, 91, 160, 0.90); */
         border-radius: 5px;
         content: '';
         height: 60px;

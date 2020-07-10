@@ -63,6 +63,7 @@ $result = mysqli_query($conexao, $sql);
 
           <?php
           while ($fetch = mysqli_fetch_row($result)) {
+            $codPraga = $fetch[0];
             echo "<h5>Nome: " . $fetch[1] .
               "<br><br>Nome científico: " . $fetch[5] .
               "<br><br>Família: " . $fetch[2] .
@@ -75,7 +76,7 @@ $result = mysqli_query($conexao, $sql);
               "<br><br>Horário de atuação: " . $fetch[11] .
               "<br><br>Estagio de atuação: " . $fetch[12] .
               "<br><br>Observações: " . $fetch[10] .
-              "</h5><hr size = 7><br>";
+              "</h5><a href='infoInimigosNaturais.php?Cod_Praga=$codPraga'>Ver inimigos naturais</a><hr size = 7><br>";
           }
           ?>
         </section>
@@ -101,13 +102,11 @@ $result = mysqli_query($conexao, $sql);
           <ul>
             <li><a href="perfil.php">Perfil</a></li>
             <li><a href="propriedades.php">Propriedades</a></li>
-            <li><a href="relatorios.php">Relatórios</a></li>
             <li>
               <span class="opener" class="ativo">Informações</span>
               <ul>
                 <li><a href="infoCulturas.php">Culturas</a></li>
                 <li><a href="infoPragas.php" class="ativo">Pragas</a></li>
-                <li><a href="infoInimigosNaturais.php">Inimigos Naturais</a></li>
                 <li><a href="infoMeControle.php">Métodos de Controle</a></li>
               </ul>
             </li>

@@ -80,12 +80,12 @@ $result = mysqli_query($conexao, $sql);
             <select name="fk_Planta_Cod_Planta" id="planta" class="form-control">
               <option>Selecione...</option>
               <?php while ($cult = mysqli_fetch_array($result)) { ?>
-                <option value="<?php echo $cult['Cod_Planta'] ?>" data-foo="<?php echo $cult['TamanhoTalhao'] ?>"><?php echo $cult['Nome']; ?></option>
+                <option value="<?php echo $cult['Cod_Planta'] ?>" data-too="<?php echo $cult['Cod_Planta'] ?>" data-foo="<?php echo $cult['TamanhoTalhao'] ?>" ><?php echo $cult['Nome']; ?></option>
               <?php } ?>
             </select>
             <br />
             <label>Tamanho da cultura</label>
-            <input type="number" class="form-control" name="TamanhoDaCultura"  id="TamanhoDaCultura">
+            <input type="number" class="form-control" name="TamanhoDaCultura" id="TamanhoDaCultura">
             <!-- pega o tamanho do talhão selecionado pra enviar, e n passa aqui -->
             <input type="hidden" class="form-control" id="tamanho-talhao">
             <input type="hidden" id="qtdTalhao" name="qtdTalhao">
@@ -126,7 +126,6 @@ $result = mysqli_query($conexao, $sql);
           <ul>
             <li><a href="perfil.php">Perfil</a></li>
             <li><a href="propriedades.php" class="ativo">Propriedades</a></li>
-            <li><a href="relatorios.php">Relatórios</a></li>
             <li>
               <span class="opener">Informações</span>
               <ul>
@@ -151,15 +150,12 @@ $result = mysqli_query($conexao, $sql);
   </div>
 
   <script>
-     
-   
-
     $(document).ready(function() {
-//       var tamanho_talhao;
-//       $('#planta').change(function() {
-       
-// ;
-//       });
+      //       var tamanho_talhao;
+      //       $('#planta').change(function() {
+
+      // ;
+      //       });
       //adiciona o tamanho do talhão
       $("#TamanhoDaCultura, #planta").change(function() {
         var tamanhoCultura = $('#TamanhoDaCultura').val();
@@ -170,23 +166,45 @@ $result = mysqli_query($conexao, $sql);
         $("#qtdTalhao").val(qtdTalhoes);
       });
       $('#btnAdicionarCultura').click(function() {
-        if ($.trim($('#planta').val()) == '' || $.trim($('#TamanhoDaCultura').val()) == '') {
-          swal("Oops", "Por favor, preencha todos os campos", "warning")
-        } else {
-          var dados = $('#formAdicionarCultura').serializeArray();
-          $.ajax({
-            type: "GET",
-            url: "../apis/adicionarCultura.php",
-            data: dados,
-            success: function(result) {
-              swal("Tudo certo", "Cultura inserida com sucesso", "success");
-              window.location = 'culturas.php?idPropriedade=<?php echo $codPropriedade?>';
-            },
-            error: function() {
-              swal("Oops", "Erro ao processar requisição!", "error");
+        var selected = $('#planta').find('option:selected');
+        var cod_planta = selected.data('too');
+        $.ajax({
+          type: "GET",
+          url: "../apis/verificaCulturaInsercao.php",
+          data: {
+            "Cod_Propriedade": "<?php echo $codPropriedade ?>",
+            "Cod_Planta": cod_planta
+          },
+          success: function(result) {
+            if (result == 2) {
+              // alert(result);
+              if ($.trim($('#planta').val()) == '' || $.trim($('#TamanhoDaCultura').val()) == '') {
+                swal("Oops", "Por favor, preencha todos os campos", "warning")
+              } else {
+                var dados = $('#formAdicionarCultura').serializeArray();
+                $.ajax({
+                  type: "GET",
+                  url: "../apis/adicionarCultura.php",
+                  data: dados,
+                  success: function(result) {
+                    swal("Tudo certo", "Cultura inserida com sucesso", "success");
+                    window.location = 'culturas.php?idPropriedade=<?php echo $codPropriedade ?>';
+                  },
+                  error: function() {
+                    swal("Oops", "Erro ao processar requisição!", "error");
+                  }
+                });
+              }
+            } else {
+              swal("Oops", "Cultura já cadastrada!", "error");
+
             }
-          });
-        }
+          },
+          error: function() {
+            swal("Oops", "Erro ao processar requisição!", "error");
+          }
+        });
+
         return false;
       });
     });
