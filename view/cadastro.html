@@ -78,7 +78,14 @@
                         url: "../apis/cadastrar.php",
                         data: dados,
                         success: function (result) {
-                            swal("Tudo certo", "Conta criada com sucesso", "success");
+                            var dados = JSON.parse(result);
+                            if(dados['confirmacao'] == false){
+                                swal("Oops", "Este e-mail já está cadastrado", "error");
+                            }else{
+                                swal("Tudo certo", "Conta criada com sucesso", "success");
+                                window.location.href = "http://localhost/mip2web/index.html";
+                            }
+        
                         },
                         error: function () {
                             swal("Oops", "Erro ao processar requisição!", "error");

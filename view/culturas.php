@@ -11,14 +11,15 @@ $sessionID = $_SESSION['id'];
 $codPropriedade = $_GET['idPropriedade'];
 
 $conexao = mysqli_connect('127.0.0.1', 'root', '', 'desenvolvimento') or die("Falha na conexão com o banco de dados!");
-$sql = "select planta.Nome, planta.Cod_Planta,
-      (
-        select count(*) from talhao
-        JOIN cultura where talhao.fk_Cultura_Cod_Cultura = cultura.Cod_Cultura   
-      ) as count_talhao, Cultura.Cod_Cultura
-    from planta
-    JOIN cultura where planta.Cod_Planta = cultura.fk_Planta_Cod_Planta 
-    and cultura.fk_Propriedade_Cod_Propriedade = $codPropriedade;";
+$sql = "SELECT Cultura.Cod_Cultura, Cultura.TamanhoDaCultura,
+  Cultura.fk_Propriedade_Cod_Propriedade,
+ Cultura.fk_Planta_Cod_Planta, 
+ Planta.Nome, Planta.Cod_Planta, count(*) as count_talhao
+  from Cultura, Planta, Talhao
+   WHERE Cultura.fk_Planta_Cod_Planta = Planta.Cod_Planta and
+    Cultura.Cod_Cultura = Talhao.fk_Cultura_Cod_Cultura and
+     Cultura.fk_Propriedade_Cod_Propriedade = '$codPropriedade' 
+      GROUP BY Planta.Nome";
 
 $result = mysqli_query($conexao, $sql);
 

@@ -176,6 +176,9 @@ $aux = mysqli_fetch_array($result);
             data: dados,
             success: function(result) {
               swal("Tudo certo", "Propriedade inserida com sucesso", "success");
+              setTimeout(function(){  }, 4000);
+              window.location = 'propriedades.php';
+            
             },
             error: function() {
               swal("Oops", "Erro ao processar requisição!", "error");

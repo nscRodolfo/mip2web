@@ -162,8 +162,8 @@ $result = mysqli_query($conexao, $sql);
         var selected = $('#planta').find('option:selected');
         var tamanho_talhao = selected.data('foo');
         var qtdTalhoes = tamanhoCultura / tamanho_talhao;
-        $('#textTalhoes').text("Quantidade de talhoes: " + qtdTalhoes);
-        $("#qtdTalhao").val(qtdTalhoes);
+        $('#textTalhoes').text("Quantidade de talhoes: " + Math.ceil(qtdTalhoes));
+        $("#qtdTalhao").val(Math.ceil(qtdTalhoes));
       });
       $('#btnAdicionarCultura').click(function() {
         var selected = $('#planta').find('option:selected');
