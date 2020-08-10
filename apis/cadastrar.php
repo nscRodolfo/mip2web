@@ -1,7 +1,7 @@
 <?php
     include "conexao.php";
 
-    $link = mysqli_connect("localhost","root","","desenvolvimento");
+    $link = mysqli_connect('localhost', 'bwigvzqu_mip', 'Mip123456', 'bwigvzqu_mip');
     mysqli_set_charset($link, "utf8");
 
 

@@ -7,7 +7,7 @@
 
     // seleciona a propriedade
 
-    $sql = "SELECT * FROM cultura WHERE fk_Propriedade_Cod_Propriedade = '$codPropriedade' 
+    $sql = "SELECT * FROM Cultura WHERE fk_Propriedade_Cod_Propriedade = '$codPropriedade' 
     AND fk_Planta_Cod_Planta = '$codPlanta'
                    ";
                    //GROUP BY Talhao.Nome

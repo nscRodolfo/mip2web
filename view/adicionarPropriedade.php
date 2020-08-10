@@ -5,19 +5,20 @@ if (!isset($_SESSION['logado']) == TRUE) {
   unset($_SESSION['email']);
   unset($_SESSION['nome']);
   unset($_SESSION['id']);
-  header('location: login.php');
+  header('location: https://mip.software/view/login.php');
 }
 $sessionID = $_SESSION['id'];
 
-$conexao = mysqli_connect('127.0.0.1', 'root', '', 'desenvolvimento') or die("Falha na conexão com o banco de dados!");
-$sql = "select propriedade.Cod_Propriedade, propriedade.Nome, propriedade.Cidade, propriedade.Estado from propriedade
-        JOIN produtor 
-        JOIN usuario where usuario.Cod_Usuario = produtor.fk_Usuario_Cod_Usuario 
-        and produtor.Cod_Produtor = propriedade.fk_Produtor_Cod_Produtor
-        and usuario.Cod_Usuario = $sessionID";
+$conexao = mysqli_connect('localhost', 'bwigvzqu_mip', 'Mip123456', 'bwigvzqu_mip') or die("Falha na conexão com o banco de dados!");
+mysqli_set_charset($conexao, "utf8");
+$sql = "select Propriedade.Cod_Propriedade, Propriedade.Nome, Propriedade.Cidade, Propriedade.Estado from Propriedade
+        JOIN Produtor 
+        JOIN Usuario where Usuario.Cod_Usuario = Produtor.fk_Usuario_Cod_Usuario 
+        and Produtor.Cod_Produtor = Propriedade.fk_Produtor_Cod_Produtor
+        and Usuario.Cod_Usuario = $sessionID";
 $result = mysqli_query($conexao, $sql);
 
-$sql = "select Cod_Produtor from produtor where fk_Usuario_Cod_Usuario = '$sessionID'";
+$sql = "select Cod_Produtor from Produtor where fk_Usuario_Cod_Usuario = '$sessionID'";
 $result = mysqli_query($conexao, $sql);
 $aux = mysqli_fetch_array($result);
 

@@ -5,10 +5,11 @@ if (!isset($_SESSION['logado']) == TRUE) {
   unset($_SESSION['email']);
   unset($_SESSION['nome']);
   unset($_SESSION['id']);
-  header('location: login.php');
+  header('location: https://mip.software/view/login.php');
 }
-$conexao = mysqli_connect('127.0.0.1', 'root', '', 'desenvolvimento') or die("Falha na conexão com o banco de dados!");
-$sql = "select * from praga";
+$conexao = mysqli_connect('localhost', 'bwigvzqu_mip', 'Mip123456', 'bwigvzqu_mip') or die("Falha na conexão com o banco de dados!");
+mysqli_set_charset($conexao, "utf8");
+$sql = "select * from Praga";
 $result = mysqli_query($conexao, $sql);
 //$aux = mysqli_fetch_array($result); 
 ?>
@@ -76,7 +77,7 @@ $result = mysqli_query($conexao, $sql);
               "<br><br>Horário de atuação: " . $fetch[11] .
               "<br><br>Estagio de atuação: " . $fetch[12] .
               "<br><br>Observações: " . $fetch[10] .
-              "</h5><a href='infoInimigosNaturais.php?Cod_Praga=$codPraga'>Ver inimigos naturais</a><hr size = 7><br>";
+              "</h5><a href='infoInimigosNaturais.php?Cod_Praga=$codPraga' class='btn btn-secondary bec' >Ver inimigos naturais</a><hr size = 7><br>";
           }
           ?>
         </section>

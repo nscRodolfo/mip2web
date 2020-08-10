@@ -5,12 +5,13 @@ if (!isset($_SESSION['logado']) == TRUE) {
   unset($_SESSION['email']);
   unset($_SESSION['nome']);
   unset($_SESSION['id']);
-  header('location: login.php');
+  header('location: https://mip.software/view/login.php');
 }
 $sessionID = $_SESSION['id'];
 $codPropriedade = $_GET['idPropriedade'];
 
-$conexao = mysqli_connect('127.0.0.1', 'root', '', 'desenvolvimento') or die("Falha na conexão com o banco de dados!");
+$conexao = mysqli_connect('localhost', 'bwigvzqu_mip', 'Mip123456', 'bwigvzqu_mip') or die("Falha na conexão com o banco de dados!");
+mysqli_set_charset($conexao, "utf8");
 $sql = "SELECT Cultura.Cod_Cultura, Cultura.TamanhoDaCultura,
   Cultura.fk_Propriedade_Cod_Propriedade,
  Cultura.fk_Planta_Cod_Planta, 
@@ -23,7 +24,7 @@ $sql = "SELECT Cultura.Cod_Cultura, Cultura.TamanhoDaCultura,
 
 $result = mysqli_query($conexao, $sql);
 
-$result2 = mysqli_query($conexao, " select * from propriedade where propriedade.Cod_Propriedade = $codPropriedade");
+$result2 = mysqli_query($conexao, " select * from Propriedade where Propriedade.Cod_Propriedade = $codPropriedade");
 
 $Propriedade = mysqli_fetch_array($result2);
 
@@ -45,7 +46,7 @@ $Propriedade = mysqli_fetch_array($result2);
   <link href="../assets/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700" rel="stylesheet">
 
-  <link rel="icon" href="imagem/Imagem1.png">
+  <link rel="icon" href="../assets/img/logo-agroecomp.png">
   <title>Monitoramento Inteligente de Pragas</title>
 
   <!-- Bootstrap core CSS -->

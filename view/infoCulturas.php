@@ -5,10 +5,11 @@ if (!isset($_SESSION['logado']) == TRUE) {
   unset($_SESSION['email']);
   unset($_SESSION['nome']);
   unset($_SESSION['id']);
-  header('location: login.php');
+  header('location: https://mip.software/view/login.php');
 }
-$conexao = mysqli_connect('127.0.0.1', 'root', '', 'desenvolvimento') or die("Falha na conexão com o banco de dados!");
-$sql = "select * from planta";
+$conexao = mysqli_connect('localhost', 'bwigvzqu_mip', 'Mip123456', 'bwigvzqu_mip') or die("Falha na conexão com o banco de dados!");
+mysqli_set_charset($conexao, "utf8");
+$sql = "select * from Planta";
 $result = mysqli_query($conexao, $sql);
 //$aux = mysqli_fetch_array($result); 
 ?>
@@ -64,14 +65,15 @@ $result = mysqli_query($conexao, $sql);
 
           <?php
           while ($fetch = mysqli_fetch_row($result)) {
-            echo "<h5>Nome: " . $fetch[6] .
-              "<br><br>Nome científico: " . $fetch[7] .
-              "<br><br>Família: " . $fetch[1] .
-              "<br><br>Temperatura ideal: " . $fetch[2] .
-              "<br><br>PH ideal: " . $fetch[3] .
-              "<br><br>Espaçamento: " . $fetch[4] .
-              "<br><br>Solo Ideal: " . $fetch[5] .
-              "<br><br>Tamanho recomendado de talhão: " . $fetch[8] .
+            echo "<h5>Nome: " . $fetch[1] .
+              "<br><br>Nome científico: " . $fetch[2] .
+              "<br><br>Família: " . $fetch[3] .
+              "<br><br>Botânica: " . $fetch[4] .
+              "<br><br>Ambiente propício: " . $fetch[5] .
+              "<br><br>Cultivo: " . $fetch[6] .
+              "<br><br>Tratos culturais: " . $fetch[7] .
+              "<br><br>Ciclo: " . $fetch[8] .
+              "<br><br>Tamanho recomendado de talhão: " . $fetch[9] . " hectare(s)" .
               "</h5><hr size = 7><br>";
           }
           ?>
@@ -98,13 +100,11 @@ $result = mysqli_query($conexao, $sql);
           <ul>
             <li><a href="perfil.php">Perfil</a></li>
             <li><a href="propriedades.php">Propriedades</a></li>
-            <li><a href="relatorios.php">Relatórios</a></li>
             <li>
               <span class="opener" class="ativo">Informações</span>
               <ul>
                 <li><a href="infoCulturas.php" class="ativo">Culturas</a></li>
                 <li><a href="infoPragas.php">Pragas</a></li>
-                <li><a href="infoInimigosNaturais.php">Inimigos Naturais</a></li>
                 <li><a href="infoMeControle.php">Métodos de Controle</a></li>
               </ul>
             </li>

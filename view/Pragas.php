@@ -5,7 +5,7 @@ if (!isset($_SESSION['logado']) == TRUE) {
   unset($_SESSION['email']);
   unset($_SESSION['nome']);
   unset($_SESSION['id']);
-  header('location: login.php');
+  header('location: https://mip.software/view/login.php');
 }
 $sessionID = $_SESSION['id'];
 $codTalhao = $_GET['CodTalhao']; #a praga é no talhão né?
@@ -13,11 +13,12 @@ $codCultura = $_GET['CodCultura']; #a praga é no talhão né?
 $codPlanta = $_GET['CodPlanta'];
 $codPropriedade = $_GET['CodPropriedade'];
 
-$conexao = mysqli_connect('localhost', 'root', '', 'desenvolvimento') or die("Falha na conexão com o banco de dados!");
+$conexao = mysqli_connect('localhost', 'bwigvzqu_mip', 'Mip123456', 'bwigvzqu_mip') or die("Falha na conexão com o banco de dados!");
+mysqli_set_charset($conexao, "utf8");
 $sql = "select *
-    from praga
-    JOIN presencapraga where praga.Cod_Praga = presencapraga.fk_Praga_Cod_Praga
-    and presencapraga.fk_Talhao_Cod_Talhao = $codTalhao;";
+    from Praga
+    JOIN PresencaPraga where Praga.Cod_Praga = PresencaPraga.fk_Praga_Cod_Praga
+    and PresencaPraga.fk_Talhao_Cod_Talhao = $codTalhao;";
 
 
 $result = mysqli_query($conexao, $sql);
@@ -29,13 +30,13 @@ $result = mysqli_query($conexao, $sql);
 // and cultura.Cod_Cultura = $codCultura");
 
 
-$result2 = mysqli_query($conexao, " select * from talhao where talhao.Cod_Talhao = $codTalhao");
+$result2 = mysqli_query($conexao, " select * from Talhao where Talhao.Cod_Talhao = $codTalhao");
 $Talhao = mysqli_fetch_array($result2);
 
-$result3 = mysqli_query($conexao, " select * from planta where planta.Cod_Planta = $codPlanta");
+$result3 = mysqli_query($conexao, " select * from Planta where Planta.Cod_Planta = $codPlanta");
 $Planta = mysqli_fetch_array($result3);
 
-$result4 = mysqli_query($conexao, " select * from propriedade where propriedade.Cod_Propriedade = $codPropriedade");
+$result4 = mysqli_query($conexao, " select * from Propriedade where Propriedade.Cod_Propriedade = $codPropriedade");
 $Propriedade = mysqli_fetch_array($result4);
 
 ?>
@@ -114,10 +115,11 @@ $Propriedade = mysqli_fetch_array($result4);
                   Nome Científico: ' . $tupla['Nome'] . '
                 </span>
                 <br>
-                <a href="#" onClick="showDiv(\'' . $tupla['Nome'] . '\' , \'' . $tupla['Cod_Praga'] . '\');">
+                <br>
+                <a href="#" class="btn btn-secondary bec" onClick="showDiv(\'' . $tupla['Nome'] . '\' , \'' . $tupla['Cod_Praga'] . '\');">
                 Gerar relatórios
                 </a>
-                <a href="excluirPraga.php?idPraga=' . $tupla['Cod_PresencaPraga'] . '&CodTalhao=' . $codTalhao . '&CodCultura=' . $codCultura . '" class="btn btn-secondary bec" >Excluir</a>
+                <a href="excluirPraga.php?idPraga=' . $tupla['Cod_PresencaPraga'] . '&CodTalhao=' . $codTalhao . '&CodCultura=' . $codCultura . '" class="btn btn-danger bec" >Excluir</a>
                   </div>
                 </div>
                </div>
@@ -182,7 +184,7 @@ $Propriedade = mysqli_fetch_array($result4);
   </div>
   <!-- modal relatorios -->
   <div class="modal fade" id="modalRelatorios" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" style="vertical-align: center" role="document">
+    <div class="modal-dialog modal-lg" style="vertical-align: center" role="document">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
@@ -203,7 +205,7 @@ $Propriedade = mysqli_fetch_array($result4);
   </div>
 
   <div class="modal fade" id="modalGraficoPragaContagem" tabindex="-1" role="dialog" aria-labelledby="modalGraficoPragaContagemLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="modalGraficoPragaContagemLabel"></h5>
@@ -220,7 +222,7 @@ $Propriedade = mysqli_fetch_array($result4);
   </div>
 
   <div class="modal fade" id="modalGraficoPragaAplicacao" tabindex="-1" role="dialog" aria-labelledby="modalGraficoPragaAplicacaoLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="modalGraficoPragaAplicacaoLabel">Modal title</h5>
@@ -338,8 +340,8 @@ $Propriedade = mysqli_fetch_array($result4);
               labels: [...datas],
               datasets: [{
                 label: 'População de pragas',
-                backgroundColor: 'rgb(255, 99, 132)',
-                borderColor: 'rgb(255, 99, 132)',
+                backgroundColor: 'rgb(101, 146, 81)',
+                borderColor: 'rgb(94, 130, 78)',
                 data: pop_pragas
               }]
             },
@@ -390,8 +392,8 @@ $Propriedade = mysqli_fetch_array($result4);
               labels: [...datas],
               datasets: [{
                 label: 'População de pragas',
-                backgroundColor: 'rgb(255, 99, 132)',
-                borderColor: 'rgb(255, 99, 132)',
+                backgroundColor: 'rgb(101, 146, 81)',
+                borderColor: 'rgb(94, 130, 78)',
                 data: pop_pragas
               }]
             },

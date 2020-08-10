@@ -5,7 +5,7 @@ if (!isset($_SESSION['logado']) == TRUE) {
   unset($_SESSION['email']);
   unset($_SESSION['nome']);
   unset($_SESSION['id']);
-  header('location: login.php');
+  header('location: https://mip.software/view/login.php');
 }
 $nome = $_SESSION['nome'];
 $email = $_SESSION['email'];

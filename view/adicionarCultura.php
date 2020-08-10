@@ -5,13 +5,14 @@ if (!isset($_SESSION['logado']) == TRUE) {
   unset($_SESSION['email']);
   unset($_SESSION['nome']);
   unset($_SESSION['id']);
-  header('location: login.php');
+  header('location: https://mip.software/view/login.php');
 }
 $sessionID = $_SESSION['id'];
 $codPropriedade = $_GET['idPropriedade'];
 
-$conexao = mysqli_connect('127.0.0.1', 'root', '', 'desenvolvimento') or die("Falha na conexão com o banco de dados!");
-$sql = "select Cod_Planta, Nome, TamanhoTalhao from planta";
+$conexao = mysqli_connect('localhost', 'bwigvzqu_mip', 'Mip123456', 'bwigvzqu_mip') or die("Falha na conexão com o banco de dados!");
+mysqli_set_charset($conexao, "utf8");
+$sql = "select Cod_Planta, Nome, TamanhoTalhao from Planta";
 $result = mysqli_query($conexao, $sql);
 
 ?>
@@ -84,7 +85,7 @@ $result = mysqli_query($conexao, $sql);
               <?php } ?>
             </select>
             <br />
-            <label>Tamanho da cultura</label>
+            <label>Tamanho da cultura (em hectare)</label>
             <input type="number" class="form-control" name="TamanhoDaCultura" id="TamanhoDaCultura">
             <!-- pega o tamanho do talhão selecionado pra enviar, e n passa aqui -->
             <input type="hidden" class="form-control" id="tamanho-talhao">

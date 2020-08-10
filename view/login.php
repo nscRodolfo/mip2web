@@ -69,7 +69,7 @@
                             var status = resultado['status'];
                             var message = resultado['message'];
                             if (status == 1) {
-                                window.location = 'http://localhost/mip2/view/propriedades.php';
+                                window.location = 'https://mip.software/view/propriedades.php';
                             } else if (status == 2) {
                                 swal("Oops", message, "error");
                             } else if (status == 3) {

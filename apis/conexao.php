@@ -1,10 +1,10 @@
 <?php
 
-    $dsn = "mysql:host=localhost;dbname=desenvolvimento;charset=utf8";
+    $dsn = "mysql:host=localhost;dbname=bwigvzqu_mip;charset=utf8";
 
-    $usuario = "root";
+    $usuario = "bwigvzqu_mip";
 
-    $senha = "";
+    $senha = "Mip123456";
 
 
     try{

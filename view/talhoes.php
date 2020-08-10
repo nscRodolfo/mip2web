@@ -5,7 +5,7 @@ if (!isset($_SESSION['logado']) == TRUE) {
   unset($_SESSION['email']);
   unset($_SESSION['nome']);
   unset($_SESSION['id']);
-  header('location: login.php');
+  header('location: https://mip.software/view/login.php');
 }
 $sessionID = $_SESSION['id'];
 $codCultura = $_GET['idCultura'];
@@ -14,25 +14,26 @@ $codPropriedade = $_GET['codPropriedade'];
 
 //lista os talhoes de certa cultura
 
-$conexao = mysqli_connect('127.0.0.1', 'root', '', 'desenvolvimento') or die("Falha na conexão com o banco de dados!");
+$conexao = mysqli_connect('localhost', 'bwigvzqu_mip', 'Mip123456', 'bwigvzqu_mip') or die("Falha na conexão com o banco de dados!");
+mysqli_set_charset($conexao, "utf8");
 $sql = " select Talhao.Nome as name, Cod_Talhao as cod
-from talhao, planta, propriedade
-JOIN cultura where planta.Cod_Planta = cultura.fk_Planta_Cod_Planta 
-and cultura.Cod_Cultura = $codCultura
-and cultura.fk_Planta_Cod_Planta = $codPlanta
-and cultura.fk_Planta_Cod_Planta = planta.Cod_Planta
-and propriedade.Cod_Propriedade = $codPropriedade
-and cultura.fk_Propriedade_Cod_Propriedade = propriedade.Cod_Propriedade
-and talhao.fk_Cultura_Cod_Cultura = cultura.Cod_Cultura
-and talhao.fk_Planta_Cod_Planta = planta.Cod_Planta";
+from Talhao, Planta, Propriedade
+JOIN Cultura where Planta.Cod_Planta = Cultura.fk_Planta_Cod_Planta 
+and Cultura.Cod_Cultura = $codCultura
+and Cultura.fk_Planta_Cod_Planta = $codPlanta
+and Cultura.fk_Planta_Cod_Planta = Planta.Cod_Planta
+and Propriedade.Cod_Propriedade = $codPropriedade
+and Cultura.fk_Propriedade_Cod_Propriedade = Propriedade.Cod_Propriedade
+and Talhao.fk_Cultura_Cod_Cultura = Cultura.Cod_Cultura
+and Talhao.fk_Planta_Cod_Planta = Planta.Cod_Planta";
 
 
 
 $result = mysqli_query($conexao, $sql);
 
-$result2 = mysqli_query($conexao, " select * from propriedade where propriedade.Cod_Propriedade = $codPropriedade");
+$result2 = mysqli_query($conexao, " select * from Propriedade where Propriedade.Cod_Propriedade = $codPropriedade");
 
-$result3 = mysqli_query($conexao, " select * from planta where planta.Cod_Planta = $codPlanta");
+$result3 = mysqli_query($conexao, " select * from Planta where Planta.Cod_Planta = $codPlanta");
 
 $Propriedade = mysqli_fetch_array($result2);
 $Planta = mysqli_fetch_array($result3);
