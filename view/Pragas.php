@@ -112,7 +112,7 @@ $Propriedade = mysqli_fetch_array($result4);
                   </div>
                   <div class = "informacoes">
                   <span style="color: #659251;">
-                  Nome Científico: ' . $tupla['Nome'] . '
+                  Nome Científico: ' . $tupla['NomeCientifico'] . '
                 </span>
                 <br>
                 <br>
@@ -204,8 +204,8 @@ $Propriedade = mysqli_fetch_array($result4);
     </div>
   </div>
 
-  <div class="modal fade" id="modalGraficoPragaContagem" tabindex="-1" role="dialog" aria-labelledby="modalGraficoPragaContagemLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
+  <div style="overflow-y: auto" class="modal fade" id="modalGraficoPragaContagem" tabindex="-1" role="dialog" aria-labelledby="modalGraficoPragaContagemLabel" aria-hidden="true">
+    <div style="overflow-y: auto" class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="modalGraficoPragaContagemLabel"></h5>
@@ -221,8 +221,8 @@ $Propriedade = mysqli_fetch_array($result4);
     </div>
   </div>
 
-  <div class="modal fade" id="modalGraficoPragaAplicacao" tabindex="-1" role="dialog" aria-labelledby="modalGraficoPragaAplicacaoLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
+  <div style="overflow-y: auto" class="modal fade" id="modalGraficoPragaAplicacao" tabindex="-1" role="dialog" aria-labelledby="modalGraficoPragaAplicacaoLabel" aria-hidden="true">
+    <div style="overflow-y: auto" class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="modalGraficoPragaAplicacaoLabel">Modal title</h5>
@@ -238,8 +238,8 @@ $Propriedade = mysqli_fetch_array($result4);
     </div>
   </div>
 
-  <div class="modal fade" id="modalPdfExcelPlanos" tabindex="-1" role="dialog" aria-labelledby="modalPdfExcelPlanosLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
+  <div style="overflow-y: auto" class="modal fade" id="modalPdfExcelPlanos" tabindex="-1" role="dialog" aria-labelledby="modalPdfExcelPlanosLabel" aria-hidden="true">
+    <div style="overflow-y: auto" class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="modalPdfExcelPlanosLabel"></h5>
@@ -256,8 +256,8 @@ $Propriedade = mysqli_fetch_array($result4);
     </div>
   </div>
 
-  <div class="modal fade" id="modalPdfExcelAplicacoes" tabindex="-1" role="dialog" aria-labelledby="modalPdfExcelAplicacoesLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
+  <div style="overflow-y: auto" class="modal fade" id="modalPdfExcelAplicacoes" tabindex="-1" role="dialog" aria-labelledby="modalPdfExcelAplicacoesLabel" aria-hidden="true">
+    <div style="overflow-y: auto" class="modal-dialog modal-lg " role="document">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="modalPdfExcelAplicacoesLabel"></h5>
